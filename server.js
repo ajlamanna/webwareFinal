@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var fs = require("fs");
-
+var cookie = require('cookieParser');
 var app = express();
 var port = process.env.PORT || 3000;
 
@@ -29,6 +29,13 @@ app.get('/index', function(req, res) {
 
 app.post('/index', function(req, res) {
   res.writeHead(200, {"Content-Type": "text/html"})
+});
+
+app.get('/cookie', function(req, res) {
+  if(req.cookie.password.toLowerCase() === "level4" || req.cookie.password.toLowerCase() === "level 4"){
+    res.redirect('littlegame.herokuapp.com/color.html');
+    res.clearCookie('password');
+  }
 });
 
 app.listen(port, function() {
