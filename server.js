@@ -49,7 +49,7 @@ app.post('/cookie', function(req, res) {
   var cookies = parseCookies(req);
   if(cookies.password.toLowerCase() === "level4" || cookies.password.toLowerCase() === "level 4") {
     res.clearCookie('password');
-    res.redirect('littlegame.herokuapp.com/color.html');
+    res.redirect('color.html');
   }
 });
 
