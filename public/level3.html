@@ -6,14 +6,14 @@
     <!-- Author: Zak Zapatka -->
     <!-- Site: https://zpak-hw6.herokuapp.com/ -->
   </head>
-  <body>
+  <body onload="checkCookie()">
     <header>
 	  <div class="level">Level 3</div>
     </header>
     <div id="level3">
     	<br />
     	<div id="passBox3">
-			<form onSubmit="return false;">
+			<form method="post" onSubmit="return false;">
    				<input id="pass" type="text" size="20"/>
       			<input type="submit" value="Submit" onClick="setCookie();"/>
       		</form>
@@ -34,4 +34,30 @@ function setCookie() {
 	document.cookie = password;
 }
 
+function checkCookie() {
+  var req = new XMLHttpRequest();
+  req.open('POST', '/cookie', true);
+  req.setRequestHeader('Content-type', 'appliction/x-www-form-urlencoded');
+  req.send(document.cookie);
+}
+
+function makeGet(url) {
+  var req = new XMLHttpRequest();
+
+  req.onreadystatechange = function() {
+    handleRes(req);
+  }
+
+  req.open('GET', url);
+  req.send();
+}
+
+function handleRes(req) {
+  if (req.readyState !== XMLHttpRequest.DONE)
+    return;
+
+  if (req.status === 200)
+    JSON.parse(req.cookie);
+}
+  console.log(document.cookie);
 </script>
