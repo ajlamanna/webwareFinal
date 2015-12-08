@@ -40,3 +40,15 @@ div{
 	text-decoration: none;
 	color: #000;
 }
+
+#level3{
+	width:700px;
+	height:600px;
+	background-image:url(../images/hserfer.jpg);
+	background-repeat:no-repeat;
+}
+
+#passBox3{
+	margin: 275px 0px 0px 500px;
+	width: 250px;
+}

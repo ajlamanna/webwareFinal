@@ -11,10 +11,27 @@
 	  <div class="level">Level 3</div>
     </header>
     <div id="level3">
+    	<br />
+    	<div id="passBox3">
+			<form onSubmit="return false;">
+   				<input id="pass" type="text" size="20"/>
+      			<input type="submit" value="Submit" onClick="setCookie();"/>
+      		</form>
+        </div>
     </div>
     <br />
-    <a href="hint/level2.html">
+    <a href="hint/level3.html">
     	<div id="next">Hint</div>
     </a>
 </body>
 </html>
+
+<script>
+
+function setCookie() {
+	var password = "password=" + document.getElementById("pass").value;
+	console.log(password);
+	document.cookie = password;
+}
+
+</script>
