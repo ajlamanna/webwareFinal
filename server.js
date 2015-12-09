@@ -40,8 +40,8 @@ app.get('/index', function(req, res) {
   console.log(req.cookie.password);
 });
 
-app.post('/index', function(req, res) {
-  res.writeHead(200, {"Content-Type": "text/html"})
+app.get('*', function(req, res) {
+  res.status(404).sendFile(__dirname + '/public/404.html');
 });
 
 app.post('/cookie', function(req, res) {
@@ -51,6 +51,11 @@ app.post('/cookie', function(req, res) {
     res.clearCookie('password');
     res.redirect('color.html');
   }
+})
+
+app.use(function(req, res) {
+  res.status(404);
+  res.render('404.html', {title: 'Clearly not the right page'});
 });
 
 app.listen(port, function() {
