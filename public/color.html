@@ -36,7 +36,8 @@
 		distance = distance * (100 / (w/2));
 		distance = (distance * -1) + 100;
     	body.style['background-color'] = 'hsl('+ theta + ', 100%, ' + distance + '%)';
-		if( ((x<(w*.25)) && (x>(w*.15))) && ((y<(h)) && (y>(h*.9))) ){
+		if( ((x<(w*.25)) && (x>(w*.05))) && ((y<(h)) && (y>(h*.7))) ){
+			//need to have this be a variable on the server
 			document.title = "Cobalt Blue";
 		} else {
 			document.title = "Pay attention";
