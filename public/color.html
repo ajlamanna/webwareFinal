@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Chocolate Chip is my favorite</title>
+    <title>Pay attention</title>
     <link rel="stylesheet" href="css/main.css">
     <!-- Author: Zak Zapatka and Andrew La Manna-->
     <!-- Site: https://littlegame.herokuapp.com/ -->
@@ -10,6 +10,37 @@
     <header>
 	  <div class="level">Level 4</div>
     </header>
-    <br />
+    <br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br />
+    <a href="hint/level4.html">
+    	<div id="next">Hint</div>
+    </a>
 </body>
 </html>
+
+<script>
+ 	var body = document.querySelector('body');
+  	window.addEventListener("mousemove", changecolor)
+
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+
+  	function changecolor(evt) {
+		var x = evt.pageX;
+		var y = evt.pageY;
+		var theta = (Math.atan2(y-(h/2),(w/2)-evt.x)) * (180/(Math.PI)) + 180;
+		var distance = Math.sqrt(Math.pow((w/2) - x , 2) + Math.pow((h/2) - y , 2));
+		distance = distance * (100 / (w/2));
+		distance = (distance * -1) + 100;
+    	body.style['background-color'] = 'hsl('+ theta + ', 100%, ' + distance + '%)';
+		if( ((x<(w*.25)) && (x>(w*.15))) && ((y<(h)) && (y>(h*.9))) ){
+			document.title = "Cobalt Blue";
+		} else {
+			document.title = "Pay attention";
+		}
+  	}
+	
+</script>
