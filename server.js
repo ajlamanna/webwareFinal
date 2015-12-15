@@ -24,11 +24,24 @@ function parseCookies (request) {
     list[parts.shift().trim()] = decodeURI(parts.join('='));
   });
 
+  console.log(list);
   return list;
 }
 
+app.post('/level3', function(req, res) {
+  var cookies = parseCookies(req);
+  console.log(cookies.password);
+  if(cookies.password.toLowerCase() === "level4" || cookies.password.toLowerCase() === "level 4") {
+    res.clearCookie('password');
+	console.log(__dirname + '/public/color.html');
+    res.redirect(301, 'https://littlegame.herokuapp.com/color.html');
+  }
+});
+
 app.get('/', function(req, res) {
   res.writeHead(200, {"Content-Type": "text/html"})
+  
+  console.log("level");
 });
 
 app.post('/', function(req, res) {
@@ -45,13 +58,12 @@ app.get('*', function(req, res) {
 });
 
 app.post('/cookie', function(req, res) {
-  //res.writeHead(200, {"Content-Type": "text/html"});
   var cookies = parseCookies(req);
   if(cookies.password.toLowerCase() === "level4" || cookies.password.toLowerCase() === "level 4") {
     res.clearCookie('password');
-    res.redirect('color.html');
+    res.redirect(301, 'color.html');
   }
-})
+});
 
 app.use(function(req, res) {
   res.status(404);

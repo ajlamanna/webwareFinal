@@ -28,9 +28,16 @@
 
 <script>
 
+makePost('/level3');
+
+function makePost(url) {
+  var req = new XMLHttpRequest();
+  req.open('POST', url);
+  req.send();
+}
+
 function setCookie() {
 	var password = "password=" + document.getElementById("pass").value;
-	console.log(password);
 	document.cookie = password;
 }
 
