@@ -32,7 +32,7 @@ app.post('/level3', function(req, res) {
   var cookies = parseCookies(req);
   console.log(cookies.password);
   if(cookies.password.toLowerCase() === "level4" || cookies.password.toLowerCase() === "level 4") {
-    res.clearCookie('password');
+    //res.clearCookie('password');
 	console.log(__dirname + '/public/color.html');
     res.redirect(301, 'https://littlegame.herokuapp.com/color.html');
   }
