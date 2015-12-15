@@ -28,7 +28,7 @@ function parseCookies (request) {
   return list;
 }
 
-app.post('/level3', function(req, res) {
+app.get('/level3', function(req, res) {
   var cookies = parseCookies(req);
   console.log(cookies.password);
   if(cookies.password.toLowerCase() === "level4" || cookies.password.toLowerCase() === "level 4") {
