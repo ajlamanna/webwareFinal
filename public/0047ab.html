@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Author: Zak Zapatka and Andrew La Manna-->
+    <!-- Site: https://littlegame.herokuapp.com/ -->
+</head>
+<body>
+<header>
+    <div class="level"><button>Level 5</button></div>
+</header>
+<div id="level5">
+    <br />
+    <div id="passBox5">
+        Dont' be a copy cat!!
+    </div>
+</div>
+<br />
+<div><a href="hint/level5.html"><button id="level5button">Hint</button></a></div>
+</body>
+</html>
+
+<script>
+    document.addEventListener('copy', function(e){
+        e.clipboardData.setData('text/plain', 'image.html');
+        e.preventDefault();
+    });
+</script>
