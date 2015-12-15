@@ -12,6 +12,16 @@ a{
 	text-decoration:none;
 }
 
+button{
+	width:120px;
+	border: 2px solid #000;
+	font-size:30px;
+	text-align:center;
+	padding:5px;
+	text-decoration: none;
+	color: #000;
+}	
+
 .level{
 	float:right;
 	width:120px;
