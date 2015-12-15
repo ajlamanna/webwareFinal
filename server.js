@@ -52,6 +52,11 @@ app.get('/level3', function(req, res) {
 
 // ----- LEVEL 4 ----- //
 
+app.get('/color', function(req, res) {
+  res.writehead(200, {"Content-Type": "text/html"});
+  res.end(JSON.stringify("Cobalt Blue"));
+});
+
 // ---- ERROR 404 ---- //
 
 app.get('*', function(req, res) {
