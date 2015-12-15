@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Part 1</title>
+    <title>Part 2</title>
     <link rel="stylesheet" href="css/main.css">
     <!-- Author: Zak Zapatka and Andrew La Manna-->
     <!-- Site: https://littlegame.herokuapp.com/ -->
 </head>
 <body>
-<img src="images/textImage.jpg" id="image"/>
+<img src="images/textImage.jpg" id="image" draggable="true"/>
 </body>
 </html>
 
 <script>
+var img = document.createElement("img");
+img.src = "images/textlmage.jpg";
+
 document.getElementById("image").addEventListener("dragstart", function(e) {
-    var img = document.createElement("img");
-    img.src = "images/textlmage.jpg";
     e.dataTransfer.setDragImage(img, 0, 0);
 }, false);
 </script>
