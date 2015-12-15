@@ -15,50 +15,50 @@
 </html>
 
 <script>
-	var secret;
-	
-	makeGet("/color");
+var secret;
 
-	function makeGet(url) {
-		var req = new XMLHttpRequest();
+makeGet('/color');
 
-		req.onreadystatechange = function() {
-			handleRes(req);
-		}
+function makeGet(url) {
+	var req = new XMLHttpRequest();
 
-		req.open('GET', url);
-		req.send();
+	req.onreadystatechange = function() {
+		handleRes(req);
 	}
 
-	function handleRes(req) {
-		if( req.readyState !== XMLHttpRequest.DONE )
-			return;
+	req.open('GET', url);
+	req.send();
+}
 
-		if(req.status === 200){
-			secret = JSON.parse(req.responseText);
-		}
+function handleRes(req) {
+	if( req.readyState !== XMLHttpRequest.DONE )
+		return;
+
+	if(req.status === 200){
+		secret = JSON.parse(req.responseText);
 	}
-	// Super push
- 	var body = document.querySelector('body');
-  	window.addEventListener("mousemove", changecolor)
+}
+// Super push
+var body = document.querySelector('body');
+window.addEventListener("mousemove", changecolor)
 
-	var w = window.innerWidth;
-	var h = window.innerHeight;
+var w = window.innerWidth;
+var h = window.innerHeight;
 
-  	function changecolor(evt) {
-		var x = evt.pageX;
-		var y = evt.pageY;
-		var theta = (Math.atan2(y-(h/2),(w/2)-evt.x)) * (180/(Math.PI)) + 180;
-		var distance = Math.sqrt(Math.pow((w/2) - x , 2) + Math.pow((h/2) - y , 2));
-		distance = distance * (100 / (w/2));
-		distance = (distance * -1) + 100;
-    	body.style['background-color'] = 'hsl('+ theta + ', 100%, ' + distance + '%)';
-		if( ((x<(w*.25)) && (x>(w*.05))) && ((y<(h)) && (y>(h*.7))) ){
-			//need to have this be a variable on the server
-			document.title = secret;
-		} else {
-			document.title = "Pay attention";
-		}
-  	}
+function changecolor(evt) {
+	var x = evt.pageX;
+	var y = evt.pageY;
+	var theta = (Math.atan2(y-(h/2),(w/2)-evt.x)) * (180/(Math.PI)) + 180;
+	var distance = Math.sqrt(Math.pow((w/2) - x , 2) + Math.pow((h/2) - y , 2));
+	distance = distance * (100 / (w/2));
+	distance = (distance * -1) + 100;
+	body.style['background-color'] = 'hsl('+ theta + ', 100%, ' + distance + '%)';
+	if( ((x<(w*.25)) && (x>(w*.05))) && ((y<(h)) && (y>(h*.7))) ){
+		//need to have this be a variable on the server
+		document.title = secret;
+	} else {
+		document.title = "Pay attention";
+	}
+}
 	
 </script>
