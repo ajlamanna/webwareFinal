@@ -53,7 +53,7 @@ function handleRes(req) {
 function redirect(code){
 	clearCookie();
 	console.log(code);
-	if(code != "level3"){
+	if(code != "level3.html"){
 		window.location.href = "https://littlegame.herokuapp.com/" + code;
 	}
 }
