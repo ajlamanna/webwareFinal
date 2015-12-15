@@ -10,7 +10,9 @@
     <header>
 	  <div class="level"><button>Level 4</button></div>
     </header>
-    <div><a href="hint/level4.html"><button id="level4">Hint</button></a></div>
+    <div><a href="hint/level4.html"><button id="level4button">Hint</button></a></div>
+    <br />
+    <div id="level4"></div>
 </body>
 </html>
 
@@ -56,8 +58,10 @@ function changecolor(evt) {
 	if( ((x<(w*.25)) && (x>(w*.05))) && ((y<(h)) && (y>(h*.7))) ){
 		//need to have this be a variable on the server
 		document.title = secret;
+		document.getElementById("level4").innerHTML = "Title";
 	} else {
 		document.title = "Pay attention";
+		document.getElementById("level4").innerHTML = "";
 	}
 }
 	
