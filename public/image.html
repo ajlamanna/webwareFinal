@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Part 1</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Author: Zak Zapatka and Andrew La Manna-->
+    <!-- Site: https://littlegame.herokuapp.com/ -->
+</head>
+<body>
+<img src="images/textImage.jpg" id="image"/>
+</body>
+</html>
+
+<script>
+document.getElementById("image").addEventListener("dragstart", function(e) {
+    var img = document.createElement("img");
+    img.src = "image/textlmage.jpg";
+    e.dataTransfer.setDragImage(img, 0, 0);
+}, false);
+</script>
