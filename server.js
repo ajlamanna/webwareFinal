@@ -15,18 +15,7 @@ app.use(bodyParser.json({
   extended: true
 }));
 
-function parseCookies (request) {
-  var list = {},
-      rc = request.headers.cookie;
-
-  rc && rc.split(';').forEach(function( cookie ) {
-    var parts = cookie.split('=');
-    list[parts.shift().trim()] = decodeURI(parts.join('='));
-  });
-
-  console.log(list);
-  return list;
-}
+// ---- LEVEL 1,2 ---- //
 
 app.get('/', function(req, res) {
   res.writeHead(200, {"Content-Type": "text/html"});
@@ -60,13 +49,9 @@ app.get('/level3', function(req, res) {
   }
 });
 
-app.post('/cookie', function(req, res) {
-  var cookies = parseCookies(req);
-  if(cookies.password.toLowerCase() === "level4" || cookies.password.toLowerCase() === "level 4") {
-    res.clearCookie('password');
-    res.redirect(301, 'color.html');
-  }
-});
+// ----- LEVEL 4 ----- //
+
+// ---- ERROR 404 ---- //
 
 app.get('*', function(req, res) {
   res.status(404).sendFile(__dirname + '/public/404.html');
@@ -82,7 +67,7 @@ app.listen(port, function() {
   
 });
 
-// subroutines
+// --- SUBROUTINES --- //
 
 function sendFile(res, filename) {
   res.writeHead(200, {'Content-type': 'text/html'});
@@ -97,6 +82,17 @@ function sendFile(res, filename) {
     res.end();
     return;
   });
+}
 
+function parseCookies (request) {
+  var list = {},
+      rc = request.headers.cookie;
 
+  rc && rc.split(';').forEach(function( cookie ) {
+    var parts = cookie.split('=');
+    list[parts.shift().trim()] = decodeURI(parts.join('='));
+  });
+
+  console.log(list);
+  return list;
 }
