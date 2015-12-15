@@ -28,17 +28,40 @@
 
 <script>
 
-makePost('/level3');
+makeGet('/level3');
 
-function makePost(url) {
+function makeGet(url) {
   var req = new XMLHttpRequest();
+
+  req.onreadystatechange = function() {
+    handleRes(req);
+  }
+
   req.open('GET', url);
   req.send();
+}
+
+function handleRes(req) {
+  if( req.readyState !== XMLHttpRequest.DONE )
+    return;
+
+  if(req.status === 200){
+    redirect(JSON.parse(req.responseText));
+  }
+}
+
+function redirect(code){
+	clearCookie();
+	window.location.href = "https://littlegame.herokuapp.com/" + code;
 }
 
 function setCookie() {
 	var password = "password=" + document.getElementById("pass").value;
 	document.cookie = password;
+}
+
+function clearCookie() {
+	document.cookie = "password=level3";
 }
 
 </script>

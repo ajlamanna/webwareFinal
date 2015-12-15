@@ -28,19 +28,8 @@ function parseCookies (request) {
   return list;
 }
 
-app.get('/level3', function(req, res) {
-  var cookies = parseCookies(req);
-  console.log(cookies.password);
-  if(cookies.password.toLowerCase() === "level4" || cookies.password.toLowerCase() === "level 4") {
-    //res.clearCookie('password');
-	console.log(__dirname + '/public/color.html');
-    res.redirect(301, 'https://littlegame.herokuapp.com/color.html');
-  }
-});
-
 app.get('/', function(req, res) {
-  res.writeHead(200, {"Content-Type": "text/html"})
-  
+  res.writeHead(200, {"Content-Type": "text/html"});
   console.log("level");
 });
 
@@ -53,8 +42,22 @@ app.get('/index', function(req, res) {
   console.log(req.cookie.password);
 });
 
-app.get('*', function(req, res) {
-  res.status(404).sendFile(__dirname + '/public/404.html');
+// ----- LEVEL 3 ----- //
+var level3 = "level3.html";
+
+app.get('/level3', function(req, res) {
+  res.writeHead(200, {"Content-Type": "text/html"});
+  var cookies = parseCookies(req);
+  console.log(cookies.password);
+  if(cookies.password != null && (cookies.password.toLowerCase() === "level4" || cookies.password.toLowerCase() === "level 4")) {
+    //res.clearCookie('password');
+	console.log(__dirname + '/public/color.html');
+    level3 = "color.html";
+	res.end(JSON.stringify(level3));
+  } else {
+	level3 = "level3.html";
+	res.end(JSON.stringify(level3));
+  }
 });
 
 app.post('/cookie', function(req, res) {
@@ -63,6 +66,10 @@ app.post('/cookie', function(req, res) {
     res.clearCookie('password');
     res.redirect(301, 'color.html');
   }
+});
+
+app.get('*', function(req, res) {
+  res.status(404).sendFile(__dirname + '/public/404.html');
 });
 
 app.use(function(req, res) {
