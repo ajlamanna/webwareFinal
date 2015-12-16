@@ -15,16 +15,74 @@
     <div id="bottomBox">11110010</div>
     <img src="images/controller.jpg" width="800" height="400" border="0" usemap="#Map" opacity="0">
       <map name="Map">
-        <area shape="rect" coords="159,149,205,195" href="#" alt="up">
-        <area shape="rect" coords="223,212,267,260" href="#" alt="right">
-        <area shape="rect" coords="98,214,142,260" href="#" alt="left">
-        <area shape="rect" coords="160,278,205,322" href="#" alt="down">
-        <area shape="circle" coords="588,153,46" href="#" alt="a">
-        <area shape="circle" coords="589,281,46" href="#" alt="b">
-        <area shape="rect" coords="351,283,454,308" href="#" alt="reset">
+        <area onclick="upButton()" shape="rect" coords="159,149,205,195" href="#" alt="up">
+        <area onclick="rightButton()" shape="rect" coords="223,212,267,260" href="#" alt="right">
+        <area onclick="leftButton()" shape="rect" coords="98,214,142,260" href="#" alt="left">
+        <area onclick="downButton()" shape="rect" coords="160,278,205,322" href="#" alt="down">
+        <area onclick="Abutton()" shape="circle" coords="588,153,46" href="#" alt="a">
+        <area onclick="Bbutton()" shape="circle" coords="589,281,46" href="#" alt="b">
+        <area onclick="reset()" shape="rect" coords="351,283,454,308" href="#" alt="reset">
       </map>
+      <div id="result" hidden="hidden"></div>
 </div>
     <br />
     <div><a href="hint/level7.html"><button>Hint</button></a></div>
 </body>
 </html>
+
+<script>
+
+  function rightButton() {
+    var num = document.getElementById("bottomBox").innerHTML;
+    num = parseInt(num, 2);
+    num = num >>> 1;
+    num = num.toString(2);
+    document.getElementById("bottomBox").innerHTML = num;
+  }
+
+  function leftButton() {
+    var num = document.getElementById("topBox").innerHTML;
+    num = parseInt(num, 2);
+    num = num << 1;
+    num = num.toString(2);
+    document.getElementById("topBox").innerHTML = num;
+  }
+
+  function upButton() {
+    var num = document.getElementById("topBox").innerHTML;
+    var temp = parseInt(num, 2);
+    temp += 1;
+    var result = temp.toString(2);
+    document.getElementById("topBox").innerHTML = result;
+  }
+
+  function downButton() {
+    var num = document.getElementById("bottomBox").innerHTML;
+    var temp = parseInt(num, 2);
+    temp = temp - 1;
+    var result = temp.toString(2);
+    document.getElementById("bottomBox").innerHTML = result;
+  }
+
+  function Bbutton(){
+    var num = document.getElementById("topBox").innerHTML;
+    num = ~num;
+    document.getElementById("topBox").innerHTML = num.toString();
+
+  }
+
+  function Abutton() {
+    var num1 = document.getElementById("topBox").innerHTML;
+    var num2 = document.getElementById("bottomBox").innerHTML;
+    var result = num1 & num2;
+    document.getElementById("result").innerHTML = result.toString(2);
+    document.getElementById("result").setAttribute("hidden", "");
+  }
+
+  function reset() {
+    document.getElementById("topBox").innerHTML = "00100111";
+    document.getElementById("bottomBox").innerHTML = "11110010";
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+</script>
