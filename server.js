@@ -6,7 +6,7 @@ var cookie = require('cookie');
 var app = express();
 var port = process.env.PORT || 3000;
 
-pp.use(require('express-uncapitalize')());
+app.use(require('express-uncapitalize')());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.urlencoded({
   extended: true
