@@ -70,3 +70,30 @@ div{
 	margin-top:200px;
 	font-size: 225%;
 }
+
+#level7{
+	width:800px;
+	height:400px;
+	background-image:url(../images/controller.jpg);
+	background-repeat:no-repeat;
+}
+
+#topBox{
+	position:absolute;
+	margin: 140px 0px 0px 300px;
+	background-color:#FFF;
+	width:200px;
+	height:50px;
+	font-family:"Courier New", Courier, monospace;
+	font-size:36px;
+}
+
+#bottomBox{
+	position:absolute;
+	margin: 210px 0px 0px 300px;
+	background-color:#FFF;
+	width:200px;
+	height:50px;
+	font-family:"Courier New", Courier, monospace;
+	font-size:36px;
+}
