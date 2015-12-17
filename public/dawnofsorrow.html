@@ -19,6 +19,7 @@ We basically just replaced the image and some css, so all credit to that guy
 			}
 
 		</style>
+        <audio preload="none" id="myAudio" src="spacejam.mp3" type="audio/mpeg"></audio>
 	</head>
 	<body>
 
@@ -35,6 +36,15 @@ We basically just replaced the image and some css, so all credit to that guy
 		</script>
 
 		<script>
+		var myAudio = document.getElementById("myAudio");
+		
+		document.addEventListener("mousedown", function() {
+		  myAudio.play();
+		});
+		
+		document.addEventListener("mouseup", function() {
+		  myAudio.pause();
+		});
 
 			var info = document.createElement( 'div' );
 			info.style.position = 'absolute';
@@ -171,6 +181,8 @@ We basically just replaced the image and some css, so all credit to that guy
 				}
 
 			}, 1000 / 60 );
+			
+			
 
 		</script>
 	</body>
