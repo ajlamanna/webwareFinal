@@ -97,3 +97,13 @@ div{
 	font-family:"Courier New", Courier, monospace;
 	font-size:36px;
 }
+
+#result{
+	position:absolute;
+	margin: 350px 0px 0px 300px;
+	background-color:#FFF;
+	width:200px;
+	height:50px;
+	font-family:"Courier New", Courier, monospace;
+	font-size:36px;
+}
