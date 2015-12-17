@@ -1,189 +1,139 @@
-
-<!--
-Code modified from: http://mrdoob.com/lab/javascript/effects/solitaire/ 
-We basically just replaced the image and some css, so all credit to that guy
--->
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<title>CONGRATULATIONS</title>
-		<style type="text/css">
-
-			body {
-				color: #000;
-				margin: 0px;
-				cursor: pointer;
-				overflow: hidden;
-			}
-
-		</style>
-        <audio preload="none" id="myAudio" src="spacejam.mp3" type="audio/mpeg"></audio>
-	</head>
-	<body>
-
-		<script type="text/javascript">
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-86951-7']);
-		  _gaq.push(['_trackPageview']);
-
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-		  })();
-		</script>
-
-		<script>
-		var myAudio = document.getElementById("myAudio");
-		
-		document.addEventListener("mousedown", function() {
-		  myAudio.play();
-		});
-		
-		document.addEventListener("mouseup", function() {
-		  myAudio.pause();
-		});
-
-			var info = document.createElement( 'div' );
-			info.style.position = 'absolute';
-			info.style.top = '10px';
-			info.style.width = '100%';
-			info.style.fontFamily = 'Monospace';
-			info.style.textAlign = 'center';
-			info.innerHTML = 'Welcome to the JAME!';
-			document.body.appendChild( info );
-
-			var canvas = document.createElement( 'canvas' );
-			canvas.style.position = 'absolute';
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
-			document.body.appendChild( canvas );
-
-			var context = canvas.getContext( '2d' );
-
-			var id = 48;
-
-			var cwidth = 142, cwidthhalf = cwidth / 2;
-			var cheight = 192, cheighthalf = cheight / 2;
-
-			var particles = [];
-
-			var Particle = function ( id, x, y, sx, sy ) {
-
-				if ( sx === 0 ) sx = 2;
-
-				var cx = 1;
-				var cy = 1;
-
-				this.update = function () {
-
-					x += sx;
-					y += sy;
-
-					if ( x < ( - cwidthhalf ) || x > ( canvas.width + cwidthhalf ) ) {
-
-						var index = particles.indexOf( this );
-						particles.splice( index, 1 );
-
-						return false;
-
-					}
-
-					if ( y > canvas.height - cheighthalf ) {
-
-						y = canvas.height - cheighthalf;
-						sy = - sy * 0.85;
-
-					}
-
-					sy += 0.98;
-
-					context.drawImage( image, cx, cy, cwidth, cheight, Math.floor( x - cwidthhalf ), Math.floor( y - cheighthalf ), cwidth, cheight	);
-
-					return true;
-
-				}
-
-			}
-
-			var image = document.createElement( 'img' );
-			image.src = "images/superJameLarge.jpg";
-
-			var throwCard = function ( x, y ) {
-
-				id > 0 ? id -- : id = 47;
-
-				var particle = new Particle( id, x, y, Math.floor( Math.random() * 6 - 3 ) * 2, - Math.random() * 16 );
-				particles.push( particle );
-
-			}
-
-			document.addEventListener( 'mousedown', function ( event ) {
-
-				event.preventDefault();
-
-				document.addEventListener( 'mousemove', onMouseMove, false );
-
-			}, false );
-
-			document.addEventListener( 'mouseup', function ( event ) {
-
-				event.preventDefault();
-
-				throwCard( event.clientX, event.clientY );
-
-				document.removeEventListener( 'mousemove', onMouseMove, false );
-
-			}, false );
-
-			function onMouseMove( event ) {
-
-				event.preventDefault();
-
-				throwCard( event.clientX, event.clientY );
-
-			}
-
-			document.addEventListener( 'touchstart', function ( event ) {
-
-				event.preventDefault();
-
-				for ( var i = 0; i < event.changedTouches.length; i ++ ) {
-
-					throwCard( event.changedTouches[ 0 ].pageX, event.changedTouches[ 0 ].pageY );
-
-				}
-
-			}, false );
-
-			document.addEventListener( 'touchmove', function ( event ) {
-
-				event.preventDefault();
-
-				for ( var i = 0; i < event.touches.length; i ++ ) {
-
-					throwCard( event.touches[ i ].pageX, event.touches[ i ].pageY );
-
-				}
-
-			}, false );
-
-			setInterval( function () {
-
-				var i = 0, l = particles.length;
-
-				while ( i < l ) {
-
-					particles[ i ].update() ? i ++ : l --;
-
-				}
-
-			}, 1000 / 60 );
-			
-			
-
-		</script>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Konami</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Author: Zak Zapatka and Andrew La Manna-->
+    <!-- Site: https://littlegame.herokuapp.com/ -->
+  </head>
+  <body>
+    <header>
+	  <div class="level"><button>Level 7</button></div>
+    </header>
+    <div id="level7">
+    <div id="topBox">00100111</div>
+    <div id="bottomBox">11110010</div>
+    <div id="result" hidden="hidden"></div>
+    <img src="images/controller.jpg" width="800" height="400" border="0" usemap="#Map" opacity="0">
+      <map name="Map">
+        <area onClick="upButton()" shape="rect" coords="159,149,205,195" alt="up">
+        <area onClick="rightButton()" shape="rect" coords="223,212,267,260" alt="right">
+        <area onClick="leftButton()" shape="rect" coords="98,214,142,260" alt="left">
+        <area onClick="downButton()" shape="rect" coords="160,278,205,322" alt="down">
+        <area onClick="Bbutton()" shape="circle" coords="588,153,46" alt="b">
+        <area onClick="Abutton()" shape="circle" coords="589,281,46" alt="a">
+        <area onClick="reset()" shape="rect" coords="351,283,454,308" alt="reset">
+      </map>
+</div>
+    <br />
+    <div><a href="hint/level7.html"><button>Hint</button></a></div>
+</body>
 </html>
+
+<script>
+
+var zero = "0";
+var one = "1";
+
+  function rightButton() {
+    var num = document.getElementById("bottomBox").innerHTML;
+    num = num.slice(0,-1);;
+    num = zero.concat(num);
+    document.getElementById("bottomBox").innerHTML = num;
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function leftButton() {
+    var num = document.getElementById("topBox").innerHTML;
+    num = num.slice(1,8);
+    num = num.concat(zero);
+    document.getElementById("topBox").innerHTML = num;
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function upButton() {
+    var num = document.getElementById("topBox").innerHTML;
+	var ret = "";
+	var found = false;
+	for(i=(num.length-1); i>-1; i--){
+		if(!found){
+			if(num.slice(i,i+1) == "0"){
+				ret = one.concat(ret);
+				found = true;
+			} else {
+				ret = zero.concat(ret);
+			}
+		} else { 
+			if(num.slice(i,i+1) == "0"){
+				ret = zero.concat(ret);
+				found = true;
+			} else {
+				ret = one.concat(ret);
+			}
+		}
+	}
+    document.getElementById("topBox").innerHTML = ret;
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function downButton() {
+    var num = document.getElementById("bottomBox").innerHTML;
+    var ret = "";
+	var found = false;
+	for(i=(num.length-1); i>-1; i--){
+		if(!found){
+			if(num.slice(i,i+1) == "1"){
+				ret = zero.concat(ret);
+				found = true;
+			} else {
+				ret = one.concat(ret);
+			}
+		} else { 
+			if(num.slice(i,i+1) == "0"){
+				ret = zero.concat(ret);
+				found = true;
+			} else {
+				ret = one.concat(ret);
+			}
+		}
+	}
+    document.getElementById("bottomBox").innerHTML = ret;
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function Bbutton(){
+    var num = document.getElementById("topBox").innerHTML;
+	var ret = "";
+	for(i = 0; i<num.length; i++){
+		if(num.slice(i,i+1) == "0"){
+			ret = ret.concat(one);
+		} else {
+			ret = ret.concat(zero);
+		}
+	}
+    document.getElementById("topBox").innerHTML = ret.toString(2);
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function Abutton() {
+    var num1 = document.getElementById("topBox").innerHTML;
+    var num2 = document.getElementById("bottomBox").innerHTML;
+    var ret = "";
+	for(i = 0; i<num1.length; i++){
+		if((num1.slice(i,i+1) == one) && (num2.slice(i,i+1) == one)){
+			ret = ret.concat(one);
+		} else {
+			ret = ret.concat(zero);
+		}
+	}
+    document.getElementById("result").innerHTML = ret;
+    document.getElementById("result").removeAttribute("hidden");
+  }
+
+  function reset() {
+    document.getElementById("topBox").innerHTML = "00100111";
+    document.getElementById("bottomBox").innerHTML = "11110010";
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+</script>
