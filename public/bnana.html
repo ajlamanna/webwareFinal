@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Konami</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Author: Zak Zapatka and Andrew La Manna-->
+    <!-- Site: https://littlegame.herokuapp.com/ -->
+  </head>
+  <body>
+    <header>
+	  <div class="level"><button>Level 7</button></div>
+    </header>
+    <div id="level7">
+    <div id="topBox">00100111</div>
+    <div id="bottomBox">11110010</div>
+    <div id="result" hidden="hidden"></div>
+    <img src="images/controller.jpg" width="800" height="400" border="0" usemap="#Map" opacity="0">
+      <map name="Map">
+        <area onClick="upButton()" shape="rect" coords="159,149,205,195" alt="up">
+        <area onClick="rightButton()" shape="rect" coords="223,212,267,260" alt="right">
+        <area onClick="leftButton()" shape="rect" coords="98,214,142,260" alt="left">
+        <area onClick="downButton()" shape="rect" coords="160,278,205,322" alt="down">
+        <area onClick="Bbutton()" shape="circle" coords="588,153,46" alt="b">
+        <area onClick="Abutton()" shape="circle" coords="589,281,46" alt="a">
+        <area onClick="reset()" shape="rect" coords="351,283,454,308" alt="reset">
+      </map>
+</div>
+    <br />
+    <div><a href="hint/level7.html"><button>Hint</button></a></div>
+</body>
+</html>
+
+<script>
+
+var zero = "0";
+var one = "1";
+
+  function rightButton() {
+    var num = document.getElementById("bottomBox").innerHTML;
+    num = num.slice(0,-1);;
+    num = zero.concat(num);
+    document.getElementById("bottomBox").innerHTML = num;
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function leftButton() {
+    var num = document.getElementById("topBox").innerHTML;
+    num = num.slice(1,8);
+    num = num.concat(zero);
+    document.getElementById("topBox").innerHTML = num;
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function upButton() {
+    var num = document.getElementById("topBox").innerHTML;
+	var ret = "";
+	var found = false;
+	for(i=(num.length-1); i>-1; i--){
+		if(!found){
+			if(num.slice(i,i+1) == "0"){
+				ret = one.concat(ret);
+				found = true;
+			} else {
+				ret = zero.concat(ret);
+			}
+		} else { 
+			if(num.slice(i,i+1) == "0"){
+				ret = zero.concat(ret);
+				found = true;
+			} else {
+				ret = one.concat(ret);
+			}
+		}
+	}
+    document.getElementById("topBox").innerHTML = ret;
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function downButton() {
+    var num = document.getElementById("bottomBox").innerHTML;
+    var ret = "";
+	var found = false;
+	for(i=(num.length-1); i>-1; i--){
+		if(!found){
+			if(num.slice(i,i+1) == "1"){
+				ret = zero.concat(ret);
+				found = true;
+			} else {
+				ret = one.concat(ret);
+			}
+		} else { 
+			if(num.slice(i,i+1) == "0"){
+				ret = zero.concat(ret);
+				found = true;
+			} else {
+				ret = one.concat(ret);
+			}
+		}
+	}
+    document.getElementById("bottomBox").innerHTML = ret;
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function Bbutton(){
+    var num = document.getElementById("topBox").innerHTML;
+	var ret = "";
+	for(i = 0; i<num.length; i++){
+		if(num.slice(i,i+1) == "0"){
+			ret = ret.concat(one);
+		} else {
+			ret = ret.concat(zero);
+		}
+	}
+    document.getElementById("topBox").innerHTML = ret.toString(2);
+	document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+
+  function Abutton() {
+    var num1 = document.getElementById("topBox").innerHTML;
+    var num2 = document.getElementById("bottomBox").innerHTML;
+    var ret = "";
+	for(i = 0; i<num1.length; i++){
+		if((num1.slice(i,i+1) == one) && (num2.slice(i,i+1) == one)){
+			ret = ret.concat(one);
+		} else {
+			ret = ret.concat(zero);
+		}
+	}
+    document.getElementById("result").innerHTML = ret;
+    document.getElementById("result").removeAttribute("hidden");
+  }
+
+  function reset() {
+    document.getElementById("topBox").innerHTML = "00100111";
+    document.getElementById("bottomBox").innerHTML = "11110010";
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("result").setAttribute("hidden", "hidden");
+  }
+</script>
